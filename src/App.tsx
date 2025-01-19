@@ -1,25 +1,29 @@
+
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { Layout } from './components/layout/Layout';
+import Dashboard from './pages/Dashboard';
+import Exercises from './pages/Exercises';
+import Progress from './pages/Progress';
+import WorkoutSession from './pages/WorkoutSession';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/workouts" element={<Exercises />} />
+            <Route path="/progress" element={<Progress />} />
+            <Route path="/workout/:id" element={<WorkoutSession />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
