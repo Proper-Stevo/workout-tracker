@@ -16,6 +16,7 @@ const client = new ApolloClient({
 
 const queryClient = new QueryClient();
 
+
 function App() {
   return (
     <ApolloProvider client={client}>
